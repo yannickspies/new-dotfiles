@@ -170,7 +170,22 @@ return {
         },
       }
 
+      local function root_pattern_exclude(opt)
+        local lsputil = require 'lspconfig.util'
+
+        return function(fname)
+          local excluded_root = lsputil.root_pattern(opt.exclude)(fname)
+          local included_root = lsputil.root_pattern(opt.root)(fname)
+
+          if excluded_root then
+            return nil
+          else
+            return included_root
+          end
+        end
+      end
       -- Volar and Typescript setup
+
       require('mason-lspconfig').setup {
         ensure_installed = {
           'volar',
@@ -198,6 +213,10 @@ return {
         settings = {
           capabilities = capabilities,
           single_file_support = false,
+          root_dir = root_pattern_exclude {
+            root = { 'package.json' },
+            exclude = {},
+          },
           tsserver_plugins = {
             '@vue/typescript-plugin',
           },
