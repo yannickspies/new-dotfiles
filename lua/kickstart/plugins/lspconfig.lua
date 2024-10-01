@@ -184,8 +184,8 @@ return {
           end
         end
       end
-      -- Volar and Typescript setup
 
+      -- Volar and Typescript setup
       require('mason-lspconfig').setup {
         ensure_installed = {
           'volar',
