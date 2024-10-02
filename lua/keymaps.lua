@@ -56,4 +56,8 @@ vim.keymap.set('n', '<Leader>O', 'O<Esc>^Da', opts)
 -- Save file
 vim.keymap.set('n', '<C-s>', ':w<CR>', opts)
 vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a', opts)
+
+-- Map <leader>e to open Oil in the current directory
+vim.keymap.set("n", "<leader>e", ":Oil<CR>", { desc = "Open Oil in current directory" })
+
 -- vim: ts=2 sts=2 sw=2 et

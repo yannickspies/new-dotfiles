@@ -6,7 +6,7 @@ return {
     null_ls.setup {
       sources = {
         null_ls.builtins.formatting.prettier.with {
-          filetypes = { 'javascript', 'typescript', 'vue', 'json', 'html', 'css', 'markdown' }, -- Filetypes to format
+          filetypes = { 'javascript', 'typescript', 'vue', 'json', 'html', 'css', 'markdown',  'lua' }, -- Filetypes to format
         },
       },
     }
