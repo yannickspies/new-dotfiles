@@ -9,42 +9,26 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
+-- Exit terminal mode in the builtin terminal with a shortcut
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
 -- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+--  Use <Tab> and <S-Tab> to switch between windows
+vim.keymap.set('n', '<Tab>', '<C-w>w', { desc = 'Move to next window' })
+vim.keymap.set('n', '<S-Tab>', '<C-w>W', { desc = 'Move to previous window' })
 
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
+-- Split management
+vim.keymap.set('n', '<leader>h', '<cmd>split<CR>', { desc = 'Horizontal split' })
+vim.keymap.set('n', '<leader>v', '<cmd>vsplit<CR>', { desc = 'Vertical split' })
+vim.keymap.set('n', '<leader>c', '<cmd>close<CR>', { desc = 'Close current window' })
 
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
+-- Buffer navigation
+vim.keymap.set('n', ']b', '<cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Previous buffer' })
+
+-- Save file
+vim.keymap.set('n', '<C-s>', ':w<CR>', opts)
+vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a', opts)
 
 -- Select all
 vim.keymap.set('n', '<C-a>', 'gg<S-v>G')
@@ -53,11 +37,5 @@ vim.keymap.set('n', '<C-a>', 'gg<S-v>G')
 vim.keymap.set('n', '<Leader>o', 'o<Esc>^Da', opts)
 vim.keymap.set('n', '<Leader>O', 'O<Esc>^Da', opts)
 
--- Save file
-vim.keymap.set('n', '<C-s>', ':w<CR>', opts)
-vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a', opts)
-
 -- Map <leader>e to open Oil in the current directory
-vim.keymap.set("n", "<leader>e", ":Oil<CR>", { desc = "Open Oil in current directory" })
-
--- vim: ts=2 sts=2 sw=2 et
+vim.keymap.set('n', '<leader>e', ':Oil<CR>', { desc = 'Open Oil in current directory' })

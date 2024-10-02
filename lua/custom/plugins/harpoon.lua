@@ -14,7 +14,7 @@ return {
       desc = 'harpoon file',
     },
     {
-      '<leader>h',
+      '<leader>p',
       function()
         local harpoon = require 'harpoon'
         harpoon.ui:toggle_quick_menu(harpoon:list())
